@@ -1,0 +1,140 @@
+/* normalize.css — compact modern normalization
+   Put this first in your stylesheet pipeline (or import it as the very first stylesheet)
+*/
+
+/* 1. sensible box model for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. remove default margin from common elements */
+:where(html, body, p, h1, h2, h3, h4, h5, h6, figure, blockquote, dl, dd, ul, ol, pre) {
+  margin: 0;
+}
+
+/* 3. base html / body */
+html {
+  line-height: 1.15; /* better default line-height */
+  -webkit-text-size-adjust: 100%; /* prevent font-size adjustments after orientation changes in iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  background-color: #fff; /* optional - leave to your theme */
+  color: #111;            /* optional - leave to your theme */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  line-height: 1.5;
+}
+
+/* 4. make images and media behave */
+img, picture, video, canvas, svg {
+  display: block; /* avoid small descender gaps */
+  max-width: 100%;
+  height: auto;
+}
+
+/* 5. tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 6. headings inherit font-weight (so you can style them easily) */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* 7. forms: inherit font and remove inconsistent margins */
+input, button, textarea, select {
+  font: inherit;
+  margin: 0;
+  color: inherit;
+  background: transparent;
+  border-radius: 0; /* prefer to control in your components */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* 8. buttons look like buttons but inherit fonts/line height */
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+/* 9. make links obvious (but styling left to you) */
+a {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/* 10. list styles */
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+/* 11. code / pre */
+pre, code, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  font-size: 1em; /* keep code font-size in flow */
+}
+
+/* 12. remove inner focus outline for Firefox on buttons (we keep focus visible below) */
+::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* 13. preserve focus outlines for accessibility — styleable by authors */
+:focus {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+/* 14. details/summary baseline */
+details {
+  display: block;
+}
+summary {
+  display: list-item;
+}
+
+/* 15. remove default fieldset/legend oddities */
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+legend {
+  padding: 0;
+}
+
+/* 17. reduce motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 18. helper utilities that are often useful to keep */
+.hidden {
+  display: none !important;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
