@@ -3,9 +3,9 @@ import styles from './layout.module.css';
 
 function Layout () {
   return (
-    <div>
+    <div className={styles.layout}>
       <Banner />
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
     </div>
@@ -14,7 +14,7 @@ function Layout () {
 
 const Banner = () => {
   return (
-    <div>
+    <div className={styles.banner}>
       <Logo />
       <NavBar />
     </div>
@@ -22,15 +22,23 @@ const Banner = () => {
 }
 
 const Logo = () => {
-  return <h1>ShopEase</h1>;
+  return <h1 className={styles.logo}>ShopEase</h1>;
 }
 
 const NavBar = () => {
   return (
-    <nav>
-      <Link to='/'>Home</Link>
-      <Link to='/shop'>Shop</Link>
-      <Link to='/cart'>Cart</Link>
+    <nav className={styles.nav}>
+      <ul>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/shop'>Shop</Link>
+        </li>
+        <li>
+          <Link to='/cart'>Cart</Link>
+        </li>
+      </ul>
     </nav>
   )
 }
