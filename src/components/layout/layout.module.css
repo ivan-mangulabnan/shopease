@@ -14,8 +14,7 @@
   justify-content: space-between;
 }
 
-.nav { 
-  flex-grow: 0;
+.nav {
   flex-shrink: 1;
   flex-basis: 50rem;
 }
