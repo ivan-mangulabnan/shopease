@@ -10,8 +10,8 @@ const routes = [
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'shop', element: <Shop /> },
-      { path: 'cart', element: <Cart /> }
+      { path: 'cart', element: <Cart /> },
+      { path: 'shop', element: <Shop /> }
     ]
   }
 ]
