@@ -5,35 +5,6 @@
   flex-direction: column;
 }
 
-.banner {
-  min-height: 10rem;
-  padding: 0 2rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav {
-  flex-shrink: 1;
-  flex-basis: 50rem;
-}
-
-.nav ul {
-  display: flex;
-  justify-content: space-around;
-}
-
-.nav a {
-  font-size: 2rem;
-  font-weight: 500;
-}
-
 .main {
   flex: 1;
-}
-
-.logo {
-  font-size: 3rem;
-  font-weight: 800;
 }
