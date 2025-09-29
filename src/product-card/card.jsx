@@ -29,9 +29,9 @@ const ProductButtons = () => {
 const Quantity = () => {
   return (
     <div>
-      <button type='button'>Decrease</button>
+      <button data-testid='decrementBtn' type='button'>Decrease</button>
       <input name="quantity" type='text' required/>
-      <button type='button'>Increase</button>
+      <button data-testid='incrementBtn' type='button'>Increase</button>
     </div>
   )
 }

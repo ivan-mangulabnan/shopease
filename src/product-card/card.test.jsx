@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Image } from "./card.jsx";
+import { Image, Quantity } from "./card.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function renderWithClient(component) {
@@ -28,6 +28,19 @@ describe('ProductCard Component', () => {
       renderWithClient(<Image source={'#'} altText="sample"/>)
       const img = screen.getByRole('img');
       expect(img).toBeInTheDocument();
+    })
+  })
+
+  describe('Quantity Component', () => {
+
+    it('renders increment button, input, and decrement button', () => {
+      renderWithClient(<Quantity />)
+      
+      const incrementBtn = screen.getByTestId(/increment/i);
+      const decrementBtn = screen.getByTestId(/decrement/i);
+      const input = screen.getByRole('textbox');
+
+      expect(incrementBtn, input, decrementBtn).toBeInTheDocument();
     })
   })
 })
