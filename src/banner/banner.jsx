@@ -3,7 +3,7 @@ import NavBar from "../navbar/navbar.jsx";
 
 function Banner () {
   return (
-    <div>
+    <div data-testid='banner'>
       <Logo />
       <NavBar />
     </div>
