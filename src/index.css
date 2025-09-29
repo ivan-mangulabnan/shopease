@@ -9,6 +9,8 @@ body {
 
 #root { 
   flex-grow: 1;
+  max-width: 160rem;
+  margin: 0 auto;
   
   display: flex;
 }
