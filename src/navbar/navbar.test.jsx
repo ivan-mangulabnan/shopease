@@ -4,11 +4,29 @@ import { routes } from "../router.jsx";
 import { createMemoryRouter, RouterProvider, MemoryRouter } from "react-router";
 import NavBar from "./navbar.jsx";
 import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+function renderWithClient(component) {
+  const query = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        cacheTime: 0,
+      },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={query}>
+      { component }
+    </QueryClientProvider>
+  )
+}
 
 describe('NavBar Component', () => {
 
   it('renders home, shop, and cart components', () => {
-    render(
+    renderWithClient(
       <MemoryRouter>
         <NavBar />
       </MemoryRouter>
@@ -23,7 +41,7 @@ describe('NavBar Component', () => {
 
   test('if home navigates to home when clicked', async () => {
     const router = createMemoryRouter(routes, { initialEntries: ['/shop'] });
-    render(<RouterProvider router={router}/>);
+    renderWithClient(<RouterProvider router={router}/>);
 
     const home = screen.getByRole('link', { name: /home/i });
 
@@ -35,7 +53,7 @@ describe('NavBar Component', () => {
 
   test('if shop navigates to shop when clicked', async () => {
     const router = createMemoryRouter(routes, { initialEntries: ['/'] });
-    render(<RouterProvider router={router}/>);
+    renderWithClient(<RouterProvider router={router}/>);
 
     const shop = screen.getByRole('link', { name: /^shop$/i });
 
@@ -47,7 +65,7 @@ describe('NavBar Component', () => {
 
     test('if cart navigates to cart when clicked', async () => {
     const router = createMemoryRouter(routes, { initialEntries: ['/'] });
-    render(<RouterProvider router={router}/>);
+    renderWithClient(<RouterProvider router={router}/>);
 
     const cart = screen.getByRole('link', { name: /cart/i });
 
