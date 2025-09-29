@@ -1,5 +1,5 @@
 function Cart () {
-  return <p>I'm Cart!</p>
+  return <p data-testid='cart-page'>I'm Cart!</p>
 }
 
 export default Cart;
