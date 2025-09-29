@@ -36,4 +36,5 @@ const Quantity = () => {
   )
 }
 
+export { Image, ProductButtons, Quantity };
 export default ProductCard;
