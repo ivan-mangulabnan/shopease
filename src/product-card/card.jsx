@@ -1,0 +1,39 @@
+function ProductCard ({ product }) {
+  return (
+    <form>
+      <Image source={product.image}/>
+      <h2>{product.title}</h2>
+      <p>{product.price}</p>
+      <ProductButtons />
+    </form>
+  )
+}
+
+const Image = ({ source, altText = '' }) => {
+  return (
+    <div>
+      <img src={source} alt={altText} />
+    </div>
+  )
+}
+
+const ProductButtons = () => {
+  return (
+    <div>
+      <button type='submit'>Add To Cart</button>
+      <Quantity />
+    </div>
+  )
+}
+
+const Quantity = () => {
+  return (
+    <div>
+      <button type='button'>Decrease</button>
+      <input name="quantity" type='text' required/>
+      <button type='button'>Increase</button>
+    </div>
+  )
+}
+
+export default ProductCard;
