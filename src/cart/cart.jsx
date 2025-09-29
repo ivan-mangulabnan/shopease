@@ -1,5 +1,9 @@
 function Cart () {
-  return <p data-testid='cart-page'>I'm Cart!</p>
+  return (
+    <div data-testid='cart-page'>
+      I'm Cart!
+    </div>
+  )
 }
 
 export default Cart;

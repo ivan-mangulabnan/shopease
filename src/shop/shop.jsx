@@ -1,5 +1,9 @@
 function Shop () {
-  return <p data-testid='shop-page'>I'm Shop!</p>
+  return (
+    <div data-testid='shop-page'>
+      I'm Shop!
+    </div>
+  )
 }
 
 export default Shop;

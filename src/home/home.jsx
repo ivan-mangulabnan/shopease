@@ -1,5 +1,7 @@
 function Home () {
-  return <p data-testid='home-page'>I'm Home!</p>
+  return (
+    <div data-testid='home-page'>I'm HOME!</div>
+  )
 }
 
 export default Home;
