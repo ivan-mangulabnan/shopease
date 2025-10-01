@@ -31,6 +31,7 @@ const ProductButtons = () => {
   }
 
   const decrement = () => {
+    if (Number(inputVal) <= 0) return;
     setInputVal(prev => Number(prev) - 1);
   } 
 
@@ -45,6 +46,7 @@ const ProductButtons = () => {
 const Quantity = ({ value, onChange, handleIncrement, handleDecrement }) => {
 
   const isValueInvalid = value === '' || isNaN(value);
+  const isNegative = value < 0;
 
   return (
     <div data-testid='quantityComponent'>

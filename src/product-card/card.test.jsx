@@ -138,5 +138,22 @@ describe('ProductCard Component', () => {
 
       expect(incrementBtn, decrementBtn).not.toBeDisabled();
     });
+
+    it('does not decrement when value is zero or less', async () => {
+      renderWithClient(<ProductButtons />)
+
+      const decrementBtn = screen.getByTestId(/decrementbtn/i);
+      const input = screen.getByRole('textbox');
+
+      await userEvent.click(decrementBtn);
+
+      expect(input).toHaveDisplayValue('0');
+
+      await userEvent.clear(input);
+      await userEvent.type(input, '-1');
+      await userEvent.click(decrementBtn);
+
+      expect(input).toHaveDisplayValue('-1');
+    })
   })
 })
