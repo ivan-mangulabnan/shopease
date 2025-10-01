@@ -116,6 +116,27 @@ describe('ProductCard Component', () => {
       await userEvent.click(decrementBtn);
 
       expect(input).toHaveValue("1");
-    });    
+    });
+
+    it('disables increment and decrement if value is empty or isNaN', async () => {
+      renderWithClient(<ProductButtons />)
+      
+      const incrementBtn = screen.getByTestId(/incrementbtn/i);
+      const decrementBtn = screen.getByTestId(/decrementbtn/i);
+      const input = screen.getByRole('textbox');
+
+      await userEvent.clear(input);
+
+      expect(incrementBtn, decrementBtn).toBeDisabled();
+
+      await userEvent.type(input, 'test');
+
+      expect(incrementBtn, decrementBtn).toBeDisabled();
+
+      await userEvent.clear(input);
+      await userEvent.type(input, '12');
+
+      expect(incrementBtn, decrementBtn).not.toBeDisabled();
+    });
   })
 })

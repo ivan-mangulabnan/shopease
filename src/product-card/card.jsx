@@ -27,11 +27,11 @@ const ProductButtons = () => {
   }
 
   const increment = () => {
-    setInputVal(prev => prev + 1);
+    setInputVal(prev => Number(prev) + 1);
   }
 
   const decrement = () => {
-    setInputVal(prev => prev - 1);
+    setInputVal(prev => Number(prev) - 1);
   } 
 
   return (
@@ -43,11 +43,14 @@ const ProductButtons = () => {
 }
 
 const Quantity = ({ value, onChange, handleIncrement, handleDecrement }) => {
+
+  const isValueInvalid = value === '' || isNaN(value);
+
   return (
     <div data-testid='quantityComponent'>
-      <button data-testid='decrementBtn' type='button' onClick={handleDecrement}>Decrease</button>
+      <button disabled={isValueInvalid} data-testid='decrementBtn' type='button' onClick={handleDecrement}>Decrease</button>
       <input name="quantity" type='text' placeholder="0" value={value} onChange={onChange} required/>
-      <button data-testid='incrementBtn' type='button' onClick={handleIncrement}>Increase</button>
+      <button disabled={isValueInvalid} data-testid='incrementBtn' type='button' onClick={handleIncrement}>Increase</button>
     </div>
   )
 }
