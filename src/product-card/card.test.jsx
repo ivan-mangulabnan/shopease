@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Image, Quantity } from "./card.jsx";
+import { Image, ProductButtons, Quantity } from "./card.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function renderWithClient(component) {
@@ -41,6 +41,18 @@ describe('ProductCard Component', () => {
       const input = screen.getByRole('textbox');
 
       expect(incrementBtn, input, decrementBtn).toBeInTheDocument();
+    })
+  })
+
+  describe('ProductButtons Component', () => {
+
+    it('renders add to cart button and Quantity Component', () => {
+      renderWithClient(<ProductButtons />)
+      
+      const addToCartBtn = screen.getByRole('button', { name: /add\sto\scart/i });
+      const quantityComp = screen.getByTestId(/quantity/i);
+
+      expect(addToCartBtn, quantityComp).toBeInTheDocument();
     })
   })
 })
