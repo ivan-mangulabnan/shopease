@@ -48,7 +48,7 @@ describe('ProductCard Component', () => {
 
     it('renders img', () => {
       renderWithClient(<Image source={'#'} altText="sample"/>)
-      const img = screen.getByRole('img');
+      const img = screen.getByRole('img', { name: 'sample' });
       expect(img).toBeInTheDocument();
     })
   })
