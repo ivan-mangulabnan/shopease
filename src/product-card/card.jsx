@@ -2,8 +2,8 @@ function ProductCard ({ product }) {
   return (
     <form>
       <Image source={product.image}/>
-      <h2>{product.title}</h2>
-      <p>{product.price}</p>
+      <h2 data-testid='prodTitle'>{product.title}</h2>
+      <p data-testid='prodPrice'>{product.price}</p>
       <ProductButtons />
     </form>
   )

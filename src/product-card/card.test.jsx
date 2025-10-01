@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Image, ProductButtons, Quantity } from "./card.jsx";
+import ProductCard, { Image, ProductButtons, Quantity } from "./card.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function renderWithClient(component) {
@@ -21,6 +21,18 @@ function renderWithClient(component) {
 }
 
 describe('ProductCard Component', () => {
+
+  it('renders Image Component, title, price, and ProductButtons Comp', () => {
+    const sampleProduct = { title: '', price: '', image: '#' }
+    renderWithClient(<ProductCard product={sampleProduct}/>);
+
+    const ImageComp = screen.getByTestId(/imagecomponent/i);
+    const title = screen.getByTestId(/prodtitle/i);
+    const price = screen.getByTestId(/prodprice/i);
+    const ProductButtonsComp = screen.getByTestId(/productbuttonscomponent/i);
+
+    expect(ImageComp, title, price, ProductButtonsComp).toBeInTheDocument();
+  });
 
   describe('Image Component', () => {
 
