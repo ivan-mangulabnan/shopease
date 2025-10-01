@@ -11,7 +11,7 @@ function ProductCard ({ product }) {
 
 const Image = ({ source, altText = '' }) => {
   return (
-    <div>
+    <div data-testid='imageComponent'>
       <img src={source} alt={altText} />
     </div>
   )
@@ -19,7 +19,7 @@ const Image = ({ source, altText = '' }) => {
 
 const ProductButtons = () => {
   return (
-    <div>
+    <div data-testid='productButtonsComponent'>
       <button type='submit'>Add To Cart</button>
       <Quantity />
     </div>
@@ -28,7 +28,7 @@ const ProductButtons = () => {
 
 const Quantity = () => {
   return (
-    <div>
+    <div data-testid='quantityComponent'>
       <button data-testid='decrementBtn' type='button'>Decrease</button>
       <input name="quantity" type='text' required/>
       <button data-testid='incrementBtn' type='button'>Increase</button>
