@@ -98,9 +98,24 @@ describe('ProductCard Component', () => {
       
       const input = screen.getByRole('textbox');
 
+      await userEvent.clear(input);
       await userEvent.type(input, 'test');
 
-      expect(input).toHaveAttribute('value', 'test');
-    });   
+      expect(input).toHaveValue('test');
+    }); 
+    
+    test('if decrement and increment button adds and subtracts 1 every click', async () => {
+      renderWithClient(<ProductButtons />)
+      
+      const incrementBtn = screen.getByTestId(/incrementbtn/i);
+      const decrementBtn = screen.getByTestId(/decrementbtn/i);
+      const input = screen.getByRole('textbox');
+
+      await userEvent.click(incrementBtn);
+      await userEvent.click(incrementBtn);
+      await userEvent.click(decrementBtn);
+
+      expect(input).toHaveValue("1");
+    });    
   })
 })

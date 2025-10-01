@@ -20,26 +20,34 @@ const Image = ({ source, altText = '' }) => {
 }
 
 const ProductButtons = () => {
-  const [inputVal, setInputVal] = useState('');
+  const [inputVal, setInputVal] = useState(0);
 
   const handleInputChange = (event) => {
     setInputVal(event.target.value);
   }
 
+  const increment = () => {
+    setInputVal(prev => prev + 1);
+  }
+
+  const decrement = () => {
+    setInputVal(prev => prev - 1);
+  } 
+
   return (
     <form data-testid='productButtonsComponent'>
       <button type='submit'>Add To Cart</button>
-      <Quantity value={inputVal} onChange={handleInputChange}/>
+      <Quantity value={inputVal} onChange={handleInputChange} handleDecrement={decrement} handleIncrement={increment}/>
     </form>
   )
 }
 
-const Quantity = ({ value, onChange }) => {
+const Quantity = ({ value, onChange, handleIncrement, handleDecrement }) => {
   return (
     <div data-testid='quantityComponent'>
-      <button data-testid='decrementBtn' type='button'>Decrease</button>
+      <button data-testid='decrementBtn' type='button' onClick={handleDecrement}>Decrease</button>
       <input name="quantity" type='text' placeholder="0" value={value} onChange={onChange} required/>
-      <button data-testid='incrementBtn' type='button'>Increase</button>
+      <button data-testid='incrementBtn' type='button' onClick={handleIncrement}>Increase</button>
     </div>
   )
 }
