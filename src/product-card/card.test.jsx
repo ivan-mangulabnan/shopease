@@ -34,6 +34,16 @@ describe('ProductCard Component', () => {
     expect(ImageComp, title, price, ProductButtonsComp).toBeInTheDocument();
   });
 
+  it('renders passed product object', () => {
+    const sampleProduct = { title: 'item', price: '25', image: '#' }
+    renderWithClient(<ProductCard product={sampleProduct}/>);
+
+    const title = screen.getByText("item");
+    const price = screen.getByText("25");
+
+    expect(title, price).toBeInTheDocument();
+  });
+
   describe('Image Component', () => {
 
     it('renders img', () => {
