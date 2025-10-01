@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { getByRole, render, screen } from "@testing-library/react";
+import { describe, expect, it, vi, test } from "vitest";
 import ProductCard, { Image, ProductButtons, Quantity } from "./card.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import userEvent from "@testing-library/user-event";
@@ -91,6 +91,16 @@ describe('ProductCard Component', () => {
       const quantityComp = screen.getByTestId(/quantity/i);
 
       expect(addToCartBtn, quantityComp).toBeInTheDocument();
-    })
+    });
+
+    test('if input changes values upon user event', async () => {
+      renderWithClient(<ProductButtons />)
+      
+      const input = screen.getByRole('textbox');
+
+      await userEvent.type(input, 'test');
+
+      expect(input).toHaveAttribute('value', 'test');
+    });   
   })
 })

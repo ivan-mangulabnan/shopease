@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 function ProductCard ({ product }) {
   return (
     <div>
@@ -18,10 +20,16 @@ const Image = ({ source, altText = '' }) => {
 }
 
 const ProductButtons = () => {
+  const [inputVal, setInputVal] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputVal(event.target.value);
+  }
+
   return (
     <form data-testid='productButtonsComponent'>
       <button type='submit'>Add To Cart</button>
-      <Quantity />
+      <Quantity value={inputVal} onChange={handleInputChange}/>
     </form>
   )
 }
