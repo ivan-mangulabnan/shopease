@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import ProductCard, { Image, ProductButtons, Quantity } from "./card.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import userEvent from "@testing-library/user-event";
 
 function renderWithClient(component) {
   const query = new QueryClient({
@@ -63,7 +64,22 @@ describe('ProductCard Component', () => {
       const input = screen.getByRole('textbox');
 
       expect(incrementBtn, input, decrementBtn).toBeInTheDocument();
-    })
+    });
+
+    it('displays passed value and calls passed function', async () => {
+      const mockValue = 'sample';
+      const mockOnChange = vi.fn();
+
+      renderWithClient(<Quantity value={mockValue} onChange={mockOnChange}/>);
+
+      const input = screen.getByDisplayValue('sample');
+
+      expect(input).toBeInTheDocument();
+
+      await userEvent.type(input, 'a');
+
+      expect(mockOnChange).toBeCalled();
+    });
   })
 
   describe('ProductButtons Component', () => {

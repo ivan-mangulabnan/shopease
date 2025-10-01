@@ -1,11 +1,11 @@
 function ProductCard ({ product }) {
   return (
-    <form>
+    <div>
       <Image source={product.image}/>
       <h2 data-testid='prodTitle'>{product.title}</h2>
       <p data-testid='prodPrice'>{product.price}</p>
       <ProductButtons />
-    </form>
+    </div>
   )
 }
 
@@ -19,18 +19,18 @@ const Image = ({ source, altText = '' }) => {
 
 const ProductButtons = () => {
   return (
-    <div data-testid='productButtonsComponent'>
+    <form data-testid='productButtonsComponent'>
       <button type='submit'>Add To Cart</button>
       <Quantity />
-    </div>
+    </form>
   )
 }
 
-const Quantity = () => {
+const Quantity = ({ value, onChange }) => {
   return (
     <div data-testid='quantityComponent'>
       <button data-testid='decrementBtn' type='button'>Decrease</button>
-      <input name="quantity" type='text' required/>
+      <input name="quantity" type='text' placeholder="0" value={value} onChange={onChange} required/>
       <button data-testid='incrementBtn' type='button'>Increase</button>
     </div>
   )
