@@ -16,6 +16,10 @@ function Cart () {
 const Item = ({ item }) => {
   return (
     <div>
+      <div>
+        <button type='button'>EDIT</button>
+        <button type='button'>REMOVE</button>
+      </div>
       <Image source={item.image} />
       <h2>{ item.title }</h2>
       <p>{ item.quantity }</p>
