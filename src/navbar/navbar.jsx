@@ -1,9 +1,12 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { CartContext } from "../cart-context.jsx";
 import { useContext } from "react";
 
 function NavBar () {
   const { cart } = useContext(CartContext);
+  const location = useLocation();
+
+  const isInCart = location.pathname.startsWith('/cart');
 
   return (
     <nav>
@@ -16,7 +19,7 @@ function NavBar () {
         </li>
         <li>
           <Link to='/cart'>Cart</Link>
-          <p data-testid='cartCount'>{ cart.length }</p>
+          { cart.length <= 0 || !isInCart && <p data-testid='cartCount'>{ cart.length }</p> }
         </li>
       </ul>
     </nav>
