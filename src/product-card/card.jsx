@@ -33,7 +33,7 @@ const ProductButtons = ({ product }) => {
     event.preventDefault();
     
     if (isInvalid) return;
-    
+
     const isProductAlreadyPresent = cart.some(item => item.id === product.id);
 
     if (isProductAlreadyPresent) {
@@ -42,7 +42,7 @@ const ProductButtons = ({ product }) => {
       }))
     }
 
-    setCart(prev => [...prev, { id: product.id, quantity: Number(inputVal) }]);
+    setCart(prev => [...prev, { ...product, quantity: Number(inputVal) }]);
   }
 
   const increment = () => {
