@@ -1,8 +1,9 @@
-import { getByRole, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi, test } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi, test, beforeEach } from "vitest";
 import ProductCard, { Image, ProductButtons, Quantity } from "./card.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import userEvent from "@testing-library/user-event";
+import { CartContext } from "../cart-context.jsx";
 
 function renderWithClient(component) {
   const query = new QueryClient({
@@ -25,7 +26,11 @@ describe('ProductCard Component', () => {
 
   it('renders Image Component, title, price, and ProductButtons Comp', () => {
     const sampleProduct = { title: '', price: '', image: '#' }
-    renderWithClient(<ProductCard product={sampleProduct}/>);
+    renderWithClient(
+      <CartContext.Provider value={{ cart: [], setCart: () => {} }}>
+        <ProductCard product={sampleProduct}/>
+      </CartContext.Provider>
+    );
 
     const ImageComp = screen.getByTestId(/imagecomponent/i);
     const title = screen.getByTestId(/prodtitle/i);
@@ -37,7 +42,12 @@ describe('ProductCard Component', () => {
 
   it('renders passed product object', () => {
     const sampleProduct = { title: 'item', price: '25', image: '#' }
-    renderWithClient(<ProductCard product={sampleProduct}/>);
+    
+    renderWithClient(
+      <CartContext.Provider value={{ cart: [], setCart: () => {} }}>
+        <ProductCard product={sampleProduct}/>
+      </CartContext.Provider>
+    );
 
     const title = screen.getByText("item");
     const price = screen.getByText("25");
@@ -84,8 +94,19 @@ describe('ProductCard Component', () => {
 
   describe('ProductButtons Component', () => {
 
+    let mockFn;
+
+    beforeEach(() => {
+      mockFn = vi.fn();
+
+      renderWithClient(
+        <CartContext.Provider value={{ cart: [], setCart: mockFn }}>
+          <ProductButtons />
+        </CartContext.Provider>
+      )
+    })
+
     it('renders add to cart button and Quantity Component', () => {
-      renderWithClient(<ProductButtons />)
       
       const addToCartBtn = screen.getByRole('button', { name: /add\sto\scart/i });
       const quantityComp = screen.getByTestId(/quantity/i);
@@ -94,7 +115,6 @@ describe('ProductCard Component', () => {
     });
 
     test('if input changes values upon user event', async () => {
-      renderWithClient(<ProductButtons />)
       
       const input = screen.getByRole('textbox');
 
@@ -105,7 +125,6 @@ describe('ProductCard Component', () => {
     }); 
     
     test('if decrement and increment button adds and subtracts 1 every click', async () => {
-      renderWithClient(<ProductButtons />)
       
       const incrementBtn = screen.getByTestId(/incrementbtn/i);
       const decrementBtn = screen.getByTestId(/decrementbtn/i);
@@ -119,7 +138,6 @@ describe('ProductCard Component', () => {
     });
 
     it('disables increment and decrement if value is empty or isNaN', async () => {
-      renderWithClient(<ProductButtons />)
       
       const incrementBtn = screen.getByTestId(/incrementbtn/i);
       const decrementBtn = screen.getByTestId(/decrementbtn/i);
@@ -140,7 +158,6 @@ describe('ProductCard Component', () => {
     });
 
     it('does not decrement when value is zero or less', async () => {
-      renderWithClient(<ProductButtons />)
 
       const decrementBtn = screen.getByTestId(/decrementbtn/i);
       const input = screen.getByRole('textbox');
@@ -154,6 +171,15 @@ describe('ProductCard Component', () => {
       await userEvent.click(decrementBtn);
 
       expect(input).toHaveDisplayValue('-1');
+    })
+
+    it('calls contextProvider fn when add to cart is pressed', async () => {
+
+      const addToCartBtn = screen.getByRole('button', { name: /add to cart/i });
+
+      await userEvent.click(addToCartBtn);
+
+      expect(mockFn).toHaveBeenCalled();
     })
   })
 })

@@ -28,6 +28,11 @@ const ProductButtons = () => {
     setInputVal(event.target.value);
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setCart();
+  }
+
   const increment = () => {
     setInputVal(prev => Number(prev) + 1);
   }
@@ -38,7 +43,7 @@ const ProductButtons = () => {
   } 
 
   return (
-    <form data-testid='productButtonsComponent'>
+    <form data-testid='productButtonsComponent' onSubmit={handleSubmit}>
       <button type='submit'>Add To Cart</button>
       <Quantity value={inputVal} onChange={handleInputChange} handleDecrement={decrement} handleIncrement={increment}/>
     </form>
