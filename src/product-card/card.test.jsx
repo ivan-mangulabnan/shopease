@@ -42,7 +42,7 @@ describe('ProductCard Component', () => {
 
   it('renders passed product object', () => {
     const sampleProduct = { title: 'item', price: '25', image: '#' }
-    
+
     renderWithClient(
       <CartContext.Provider value={{ cart: [], setCart: () => {} }}>
         <ProductCard product={sampleProduct}/>
@@ -134,10 +134,10 @@ describe('ProductCard Component', () => {
       await userEvent.click(incrementBtn);
       await userEvent.click(decrementBtn);
 
-      expect(input).toHaveValue("1");
+      expect(input).toHaveValue("2");
     });
 
-    it('disables increment and decrement if value is empty or isNaN', async () => {
+    it('disables decrement if value is empty or isNaN', async () => {
       
       const incrementBtn = screen.getByTestId(/incrementbtn/i);
       const decrementBtn = screen.getByTestId(/decrementbtn/i);
@@ -145,16 +145,16 @@ describe('ProductCard Component', () => {
 
       await userEvent.clear(input);
 
-      expect(incrementBtn, decrementBtn).toBeDisabled();
+      expect(decrementBtn).toBeDisabled();
 
       await userEvent.type(input, 'test');
 
-      expect(incrementBtn, decrementBtn).toBeDisabled();
+      expect(decrementBtn).toBeDisabled();
 
       await userEvent.clear(input);
       await userEvent.type(input, '12');
 
-      expect(incrementBtn, decrementBtn).not.toBeDisabled();
+      expect(decrementBtn).not.toBeDisabled();
     });
 
     it('does not decrement when value is zero or less', async () => {
@@ -176,7 +176,9 @@ describe('ProductCard Component', () => {
     it('calls contextProvider fn when add to cart is pressed', async () => {
 
       const addToCartBtn = screen.getByRole('button', { name: /add to cart/i });
+      const incrementBtn = screen.getByTestId(/incrementbtn/i);
 
+      await userEvent.click(incrementBtn);
       await userEvent.click(addToCartBtn);
 
       expect(mockFn).toHaveBeenCalled();

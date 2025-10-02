@@ -15,8 +15,8 @@ const routes = [
       { path: '/shop',
         element: <Shop />,
         children: [
-          { index: true, element: <Navigate to='shop/products' replace/> },
-          { path: 'shop/products', element: <Products /> }
+          { index: true, element: <Navigate to='products' replace/> },
+          { path: 'products', element: <Products /> }
         ]
       }
     ]
