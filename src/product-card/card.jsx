@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { CartContext } from "../cart-context.jsx";
 
 function ProductCard ({ product }) {
   return (
@@ -21,6 +22,7 @@ const Image = ({ source, altText = '' }) => {
 
 const ProductButtons = () => {
   const [inputVal, setInputVal] = useState(0);
+  const { cart, setCart } = useContext(CartContext);
 
   const handleInputChange = (event) => {
     setInputVal(event.target.value);
