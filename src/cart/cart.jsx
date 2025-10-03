@@ -7,17 +7,16 @@ function Cart () {
 
   return (
     <div data-testid='cart-page'>
-      { cart.length > 0 && cart.map(item => <Item item={item}/>) }
+      { cart.length > 0 && cart.map(item => <Item item={item} setCart={setCart}/>) }
       { cart.length > 0 && <Total cart={cart}/> }
     </div>
   )
 }
 
-const Item = ({ item }) => {
+const Item = ({ item, setCart }) => {
   return (
     <div>
       <div>
-        <button type='button'>EDIT</button>
         <button type='button'>REMOVE</button>
       </div>
       <Image source={item.image} />
